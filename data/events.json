@@ -1,0 +1,730 @@
+{
+  "events": [
+    {
+      "id": "EVT-001",
+      "case_id": "CASE-2024-0847",
+      "type": "case.created",
+      "timestamp": "2024-09-12T09:15:00Z",
+      "actor": "system",
+      "payload": {
+        "case_reference": "JW/PROP/2024/0847",
+        "case_type": "purchase",
+        "handler": "David Chen"
+      },
+      "description": "New purchase case opened."
+    },
+    {
+      "id": "EVT-002",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-12T10:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-001",
+        "task_title": "Client onboarding and ID verification",
+        "from_status": "not_started",
+        "to_status": "in_progress"
+      },
+      "description": "ID verification process started."
+    },
+    {
+      "id": "EVT-003",
+      "case_id": "CASE-2024-0847",
+      "type": "document.requested",
+      "timestamp": "2024-09-12T10:15:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "document_type": "identity_documents",
+        "requested_from": "Sarah Mitchell",
+        "documents": ["passport", "utility_bill"]
+      },
+      "description": "ID documents requested from client."
+    },
+    {
+      "id": "EVT-004",
+      "case_id": "CASE-2024-0847",
+      "type": "document.received",
+      "timestamp": "2024-09-13T16:42:00Z",
+      "actor": "Sarah Mitchell",
+      "payload": {
+        "document_type": "identity_documents",
+        "documents": ["passport_scan", "council_tax_bill"]
+      },
+      "description": "Client submitted identity documents."
+    },
+    {
+      "id": "EVT-005",
+      "case_id": "CASE-2024-0847",
+      "type": "compliance.check_completed",
+      "timestamp": "2024-09-14T14:20:00Z",
+      "actor": "system",
+      "payload": {
+        "check_type": "aml",
+        "result": "pass",
+        "provider": "SmartSearch"
+      },
+      "description": "Anti-money laundering check completed. Passed."
+    },
+    {
+      "id": "EVT-006",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-14T14:20:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-001",
+        "task_title": "Client onboarding and ID verification",
+        "from_status": "in_progress",
+        "to_status": "completed"
+      },
+      "description": "Client onboarding complete."
+    },
+    {
+      "id": "EVT-007",
+      "case_id": "CASE-2024-0847",
+      "type": "milestone.reached",
+      "timestamp": "2024-09-14T14:20:00Z",
+      "actor": "system",
+      "payload": {
+        "milestone": "onboarding_complete",
+        "label": "Onboarding Complete"
+      },
+      "description": "Client has been onboarded and verified. The case can now proceed."
+    },
+    {
+      "id": "EVT-008",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-15T09:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-002",
+        "task_title": "Request and review mortgage offer",
+        "from_status": "not_started",
+        "to_status": "in_progress"
+      },
+      "description": "Mortgage offer process initiated."
+    },
+    {
+      "id": "EVT-009",
+      "case_id": "CASE-2024-0847",
+      "type": "searches.ordered",
+      "timestamp": "2024-09-15T09:30:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "search_types": ["local_authority", "environmental", "water_drainage"],
+        "provider": "Bristol City Council / Landmark / Wessex Water"
+      },
+      "description": "Property searches ordered."
+    },
+    {
+      "id": "EVT-009a",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-15T09:30:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-003",
+        "task_title": "Order local authority searches",
+        "from_status": "not_started",
+        "to_status": "in_progress"
+      },
+      "description": "Local authority searches started."
+    },
+    {
+      "id": "EVT-009b",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-15T09:45:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-004",
+        "task_title": "Order environmental search",
+        "from_status": "not_started",
+        "to_status": "in_progress"
+      },
+      "description": "Environmental search started."
+    },
+    {
+      "id": "EVT-009c",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-15T10:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-005",
+        "task_title": "Order water and drainage search",
+        "from_status": "not_started",
+        "to_status": "in_progress"
+      },
+      "description": "Water and drainage search started."
+    },
+    {
+      "id": "EVT-010",
+      "case_id": "CASE-2024-0847",
+      "type": "document.requested",
+      "timestamp": "2024-09-16T08:30:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "document_type": "title_documents",
+        "requested_from": "Land Registry",
+        "documents": ["official_copies", "title_plan"]
+      },
+      "description": "Official copies of title requested from Land Registry."
+    },
+    {
+      "id": "EVT-011",
+      "case_id": "CASE-2024-0847",
+      "type": "document.received",
+      "timestamp": "2024-09-17T11:00:00Z",
+      "actor": "Land Registry",
+      "payload": {
+        "document_type": "title_documents",
+        "documents": ["official_copies_register", "title_plan"]
+      },
+      "description": "Title documents received from Land Registry."
+    },
+    {
+      "id": "EVT-012",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-18T10:00:00Z",
+      "actor": "system",
+      "payload": {
+        "task_id": "TASK-006",
+        "task_title": "Review title documents",
+        "from_status": "not_started",
+        "to_status": "in_progress"
+      },
+      "description": "Title documents received. Task assigned for review."
+    },
+    {
+      "id": "EVT-012a",
+      "case_id": "CASE-2024-0847",
+      "type": "ai.analysis_completed",
+      "timestamp": "2024-09-18T10:04:00Z",
+      "actor": "ai_assistant",
+      "payload": {
+        "task_id": "TASK-006",
+        "analysis_type": "title_review",
+        "findings": {
+          "title_number": "AV123456",
+          "tenure": "freehold",
+          "registered_owner": "James Arthur Hargreaves and Linda Mary Hargreaves",
+          "charges": "None registered",
+          "restrictive_covenants": [
+            {
+              "origin": "Transfer dated 14 March 1987 (original estate development by Willowmere Homes Ltd)",
+              "summary": "Standard residential covenants: no commercial use, no caravans or mobile homes, boundary fences to be maintained, no external alterations without developer consent (now largely unenforceable due to age)."
+            }
+          ],
+          "easements": [
+            {
+              "type": "right_of_way",
+              "detail": "Right of way on foot and with vehicles over the rear access lane shown tinted brown on the title plan. Shared with numbers 40 and 44 Willowmere Drive.",
+              "assessment": "Standard for this type of estate. No concerns."
+            }
+          ],
+          "flags": [],
+          "risk_level": "low",
+          "summary": "Title is clean. Freehold with no charges. Standard restrictive covenants from the 1987 estate development are unlikely to cause issues. Shared right of way over rear lane is common for this street and well-established. No adverse entries. Recommended to proceed."
+        }
+      },
+      "description": "AI completed analysis of title register and title plan."
+    },
+    {
+      "id": "EVT-012b",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-18T10:04:00Z",
+      "actor": "ai_assistant",
+      "payload": {
+        "task_id": "TASK-006",
+        "task_title": "Review title documents",
+        "from_status": "in_progress",
+        "to_status": "in_review"
+      },
+      "description": "AI analysis complete. Awaiting conveyancer review."
+    },
+    {
+      "id": "EVT-013",
+      "case_id": "CASE-2024-0847",
+      "type": "document.received",
+      "timestamp": "2024-09-20T14:00:00Z",
+      "actor": "Blackwood & Associates",
+      "payload": {
+        "document_type": "draft_contract_pack",
+        "documents": ["draft_contract", "TA6_property_info", "TA7_leasehold_info", "TA10_fittings", "energy_performance_certificate", "management_info"]
+      },
+      "description": "Draft contract pack received from seller's solicitor."
+    },
+    {
+      "id": "EVT-014",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-23T09:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-007",
+        "task_title": "Review draft contract pack",
+        "from_status": "not_started",
+        "to_status": "in_progress"
+      },
+      "description": "Contract pack review started."
+    },
+    {
+      "id": "EVT-015",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-09-25T16:30:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-006",
+        "task_title": "Review title documents",
+        "from_status": "in_review",
+        "to_status": "completed"
+      },
+      "description": "Conveyancer reviewed and confirmed AI title analysis. Title is clean with standard covenants."
+    },
+    {
+      "id": "EVT-016",
+      "case_id": "CASE-2024-0847",
+      "type": "document.received",
+      "timestamp": "2024-10-01T10:00:00Z",
+      "actor": "Nationwide Building Society",
+      "payload": {
+        "document_type": "mortgage_offer",
+        "offer_amount": 340000,
+        "expiry_date": "2025-03-12T00:00:00Z"
+      },
+      "description": "Formal mortgage offer received from Nationwide."
+    },
+    {
+      "id": "EVT-017",
+      "case_id": "CASE-2024-0847",
+      "type": "milestone.reached",
+      "timestamp": "2024-10-01T10:00:00Z",
+      "actor": "system",
+      "payload": {
+        "milestone": "mortgage_offer_received",
+        "label": "Mortgage Offer Received"
+      },
+      "description": "Formal mortgage offer is in hand. A key milestone for the purchase."
+    },
+    {
+      "id": "EVT-018",
+      "case_id": "CASE-2024-0847",
+      "type": "search.result_received",
+      "timestamp": "2024-10-02T15:30:00Z",
+      "actor": "system",
+      "payload": {
+        "search_type": "environmental",
+        "result_summary": "Low risk across all categories",
+        "task_id": "TASK-004"
+      },
+      "description": "Environmental search results received. Low risk."
+    },
+    {
+      "id": "EVT-019",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-10-02T15:30:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-004",
+        "task_title": "Order environmental search",
+        "from_status": "in_progress",
+        "to_status": "completed"
+      },
+      "description": "Environmental search completed."
+    },
+    {
+      "id": "EVT-020",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-10-03T11:45:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-002",
+        "task_title": "Request and review mortgage offer",
+        "from_status": "in_progress",
+        "to_status": "completed"
+      },
+      "description": "Mortgage offer reviewed. Terms are acceptable."
+    },
+    {
+      "id": "EVT-021",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-10-04T17:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-007",
+        "task_title": "Review draft contract pack",
+        "from_status": "in_progress",
+        "to_status": "completed"
+      },
+      "description": "Contract pack review completed. Enquiries to be raised."
+    },
+    {
+      "id": "EVT-022",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-10-05T10:00:00Z",
+      "actor": "system",
+      "payload": {
+        "task_id": "TASK-008",
+        "task_title": "Raise and resolve pre-contract enquiries",
+        "from_status": "not_started",
+        "to_status": "in_progress"
+      },
+      "description": "Dependencies met. Enquiry drafting task assigned."
+    },
+    {
+      "id": "EVT-022a",
+      "case_id": "CASE-2024-0847",
+      "type": "ai.draft_produced",
+      "timestamp": "2024-10-05T10:06:00Z",
+      "actor": "ai_assistant",
+      "payload": {
+        "task_id": "TASK-008",
+        "draft_type": "pre_contract_enquiries",
+        "based_on": ["TASK-006", "TASK-007", "TASK-003", "TASK-004", "TASK-005"],
+        "draft_enquiries": [
+          "Please confirm who is responsible for maintaining the boundary fences and hedges on all sides of the property.",
+          "Has there been any boundary dispute with any adjoining or neighbouring property? If so, please provide full details and confirmation of resolution.",
+          "Please provide the boiler service history for the past three years and confirm whether any manufacturer warranty remains in force.",
+          "The property information form indicates a loft conversion was carried out in 2019. Please provide the building regulations completion certificate or evidence of local authority sign-off.",
+          "We note from the environmental search that Japanese knotweed has been identified on neighbouring land. Please provide a copy of any management or treatment plan and confirm whether the seller is aware of any encroachment onto the subject property.",
+          "The property information form refers to damp treatment carried out in 2021. Please provide a copy of the guarantee or warranty for this work.",
+          "Please clarify the arrangement for shared use and maintenance of the driveway. Is there a formal maintenance agreement in place?",
+          "Please confirm that the property will be sold with vacant possession on the completion date.",
+          "Please provide evidence that the electrical installation has been tested and certified within the past five years.",
+          "Has the seller received any notices from the local authority, including planning, environmental health, or highways?",
+          "Please confirm that all fixtures and fittings listed in the TA10 form are included in the sale and in working order.",
+          "Are there any ongoing or anticipated disputes with neighbours relating to noise, access, or land use?",
+          "Please confirm the arrangements for refuse and recycling collection and whether the bins are stored on the shared access lane.",
+          "Has any insurance claim been made on the property in the past ten years? If so, please provide details.",
+          "Please confirm that the right of way over the rear access lane is exercised without dispute and that maintenance costs are shared equally with numbers 40 and 44."
+        ],
+        "summary": "15 draft pre-contract enquiries generated from analysis of title review, contract pack, and property search results. Key areas of concern: loft conversion building regs, Japanese knotweed on neighbouring land, boundary maintenance, and damp treatment guarantee."
+      },
+      "description": "AI drafted 15 pre-contract enquiries based on title, contract, and search findings."
+    },
+    {
+      "id": "EVT-022b",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-10-05T10:06:00Z",
+      "actor": "ai_assistant",
+      "payload": {
+        "task_id": "TASK-008",
+        "task_title": "Raise and resolve pre-contract enquiries",
+        "from_status": "in_progress",
+        "to_status": "in_review"
+      },
+      "description": "Draft enquiries ready for conveyancer review."
+    },
+    {
+      "id": "EVT-022c",
+      "case_id": "CASE-2024-0847",
+      "type": "ai.draft_reviewed",
+      "timestamp": "2024-10-07T09:15:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-008",
+        "verdict": "approved_with_amendments",
+        "amendments_made": 2,
+        "notes": "Strengthened wording on the knotweed enquiry to specifically request evidence of professional treatment. Removed one enquiry about electrical certification (seller already provided EICR in the contract pack) and replaced with a more specific question about the shared driveway resurfacing costs."
+      },
+      "description": "Conveyancer reviewed AI-drafted enquiries. Approved with minor amendments."
+    },
+    {
+      "id": "EVT-022d",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-10-07T09:15:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-008",
+        "task_title": "Raise and resolve pre-contract enquiries",
+        "from_status": "in_review",
+        "to_status": "in_progress"
+      },
+      "description": "Draft approved. Enquiries ready to send."
+    },
+    {
+      "id": "EVT-023",
+      "case_id": "CASE-2024-0847",
+      "type": "enquiry.raised",
+      "timestamp": "2024-10-07T11:30:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "enquiry_count": 15,
+        "sent_to": "Blackwood & Associates",
+        "key_topics": [
+          "Boundary maintenance responsibilities",
+          "History of any boundary disputes",
+          "Boiler service history and warranty",
+          "Loft conversion building regulations sign-off",
+          "Japanese knotweed on neighbouring land",
+          "Damp treatment in 2021 guarantee documentation",
+          "Shared driveway usage and maintenance",
+          "Confirmation of vacant possession on completion"
+        ]
+      },
+      "description": "15 pre-contract enquiries raised with seller's solicitor."
+    },
+    {
+      "id": "EVT-024",
+      "case_id": "CASE-2024-0847",
+      "type": "milestone.reached",
+      "timestamp": "2024-10-07T11:30:00Z",
+      "actor": "system",
+      "payload": {
+        "milestone": "enquiries_raised",
+        "label": "Enquiries Raised"
+      },
+      "description": "Pre-contract enquiries have been sent to the seller's solicitor. Awaiting their replies."
+    },
+    {
+      "id": "EVT-025",
+      "case_id": "CASE-2024-0847",
+      "type": "search.result_received",
+      "timestamp": "2024-10-08T09:15:00Z",
+      "actor": "system",
+      "payload": {
+        "search_type": "water_drainage",
+        "result_summary": "Connected to mains water and public sewer. No public sewers cross the property.",
+        "task_id": "TASK-005"
+      },
+      "description": "Water and drainage search results received."
+    },
+    {
+      "id": "EVT-026",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-10-08T09:15:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-005",
+        "task_title": "Order water and drainage search",
+        "from_status": "in_progress",
+        "to_status": "completed"
+      },
+      "description": "Water and drainage search completed."
+    },
+    {
+      "id": "EVT-027",
+      "case_id": "CASE-2024-0847",
+      "type": "search.result_received",
+      "timestamp": "2024-10-18T10:00:00Z",
+      "actor": "system",
+      "payload": {
+        "search_type": "local_authority",
+        "result_summary": "No adverse entries. Planning application noted for neighbouring property (rear extension), not material to this purchase.",
+        "task_id": "TASK-003"
+      },
+      "description": "Local authority search results received."
+    },
+    {
+      "id": "EVT-028",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-10-18T10:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-003",
+        "task_title": "Order local authority searches",
+        "from_status": "in_progress",
+        "to_status": "completed"
+      },
+      "description": "Local authority searches completed."
+    },
+    {
+      "id": "EVT-029",
+      "case_id": "CASE-2024-0847",
+      "type": "milestone.reached",
+      "timestamp": "2024-10-18T10:00:00Z",
+      "actor": "system",
+      "payload": {
+        "milestone": "all_searches_complete",
+        "label": "All Searches Complete"
+      },
+      "description": "All property searches have been returned. No significant issues identified."
+    },
+    {
+      "id": "EVT-030",
+      "case_id": "CASE-2024-0847",
+      "type": "enquiry.reply_received",
+      "timestamp": "2024-10-28T14:00:00Z",
+      "actor": "Blackwood & Associates",
+      "payload": {
+        "replies_received": 11,
+        "outstanding": 4,
+        "outstanding_topics": [
+          "Boundary dispute history",
+          "Boiler warranty documentation",
+          "Japanese knotweed management plan (neighbouring land)",
+          "Building regulations sign-off for 2019 loft conversion"
+        ]
+      },
+      "description": "First batch of enquiry replies received. 11 of 15 resolved. 4 outstanding."
+    },
+    {
+      "id": "EVT-031",
+      "case_id": "CASE-2024-0847",
+      "type": "communication.sent",
+      "timestamp": "2024-10-29T09:30:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "to": "Sarah Mitchell",
+        "method": "email",
+        "subject": "Case update: enquiries progress",
+        "summary": "Advised client that 11 of 15 enquiries have been resolved. 4 remain outstanding. Explained the nature of the outstanding items and that we are chasing the seller's solicitor."
+      },
+      "description": "Client updated on enquiry progress via email."
+    },
+    {
+      "id": "EVT-032",
+      "case_id": "CASE-2024-0847",
+      "type": "task.status_changed",
+      "timestamp": "2024-11-01T09:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "task_id": "TASK-009",
+        "task_title": "Report on title to mortgage lender",
+        "from_status": "not_started",
+        "to_status": "blocked"
+      },
+      "description": "Title report to lender blocked. Awaiting resolution of outstanding enquiries."
+    },
+    {
+      "id": "EVT-033",
+      "case_id": "CASE-2024-0847",
+      "type": "enquiry.chased",
+      "timestamp": "2024-11-08T10:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "chased_with": "Blackwood & Associates",
+        "outstanding_count": 4,
+        "method": "email"
+      },
+      "description": "Outstanding enquiries chased with seller's solicitor."
+    },
+    {
+      "id": "EVT-034",
+      "case_id": "CASE-2024-0847",
+      "type": "enquiry.chased",
+      "timestamp": "2024-11-22T09:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "chased_with": "Blackwood & Associates",
+        "outstanding_count": 4,
+        "method": "email_and_phone",
+        "notes": "Spoke with Helen Yates. She confirmed the seller is obtaining the building regs certificate and knotweed management plan from their management company. Expected within 1-2 weeks."
+      },
+      "description": "Outstanding enquiries chased again. Seller's solicitor expects replies within 1-2 weeks."
+    },
+    {
+      "id": "EVT-035",
+      "case_id": "CASE-2024-0847",
+      "type": "communication.sent",
+      "timestamp": "2024-11-22T11:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "to": "Sarah Mitchell",
+        "method": "email",
+        "subject": "Case update: still awaiting seller's responses",
+        "summary": "Updated client that 4 enquiries remain outstanding. Seller's solicitor has confirmed they are chasing the seller for the remaining documents. Estimated 1-2 weeks for resolution."
+      },
+      "description": "Client updated on outstanding enquiry status."
+    },
+    {
+      "id": "EVT-036",
+      "case_id": "CASE-2024-0847",
+      "type": "communication.received",
+      "timestamp": "2024-11-25T08:15:00Z",
+      "actor": "Sarah Mitchell",
+      "payload": {
+        "from": "Sarah Mitchell",
+        "method": "email",
+        "summary": "Client asking if the delays will affect the target completion date. Concerned about mortgage offer expiry. Wants to know what happens if the seller can't provide the building regs certificate."
+      },
+      "description": "Client emailed with concerns about delays and mortgage offer expiry."
+    },
+    {
+      "id": "EVT-037",
+      "case_id": "CASE-2024-0847",
+      "type": "communication.sent",
+      "timestamp": "2024-11-25T14:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "to": "Sarah Mitchell",
+        "method": "email",
+        "subject": "Re: Delays and mortgage offer",
+        "summary": "Reassured client that mortgage offer is valid until March 2025, so no immediate risk. Explained that if building regs certificate cannot be obtained, indemnity insurance is a common alternative. Confirmed we are actively chasing."
+      },
+      "description": "Replied to client concerns about delays and mortgage offer expiry."
+    },
+    {
+      "id": "EVT-038",
+      "case_id": "CASE-2024-0847",
+      "type": "internal.note",
+      "timestamp": "2024-12-02T09:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "note": "No update from seller's solicitor on outstanding enquiries. Will chase again mid-week. May need to discuss indemnity insurance route with client if building regs cert cannot be produced."
+      },
+      "description": "Internal file note. No progress on outstanding enquiries."
+    },
+    {
+      "id": "EVT-039",
+      "case_id": "CASE-2024-0847",
+      "type": "enquiry.reply_received",
+      "timestamp": "2024-12-06T16:00:00Z",
+      "actor": "Blackwood & Associates",
+      "payload": {
+        "replies_received": 2,
+        "outstanding": 2,
+        "resolved_topics": [
+          "Boundary dispute history: confirmed no disputes. Boundaries maintained by mutual agreement.",
+          "Boiler warranty documentation: warranty expired 2023, no ongoing cover. Boiler last serviced March 2024."
+        ],
+        "still_outstanding": [
+          "Japanese knotweed management plan (neighbouring land)",
+          "Building regulations sign-off for 2019 loft conversion"
+        ]
+      },
+      "description": "Two more enquiry replies received. Boundary and boiler matters resolved. Knotweed plan and building regs still outstanding."
+    },
+    {
+      "id": "EVT-040",
+      "case_id": "CASE-2024-0847",
+      "type": "communication.sent",
+      "timestamp": "2024-12-09T10:00:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "to": "Sarah Mitchell",
+        "method": "email",
+        "subject": "Progress update: 2 enquiries remaining",
+        "summary": "Good news: down to 2 outstanding enquiries (knotweed plan and loft conversion building regs). Boundary and boiler matters are resolved. Chasing seller's solicitor on the remaining items. If building regs cert unavailable, we will discuss indemnity insurance option."
+      },
+      "description": "Client updated. 2 enquiries remaining."
+    },
+    {
+      "id": "EVT-041",
+      "case_id": "CASE-2024-0847",
+      "type": "enquiry.chased",
+      "timestamp": "2024-12-13T09:30:00Z",
+      "actor": "David Chen",
+      "payload": {
+        "chased_with": "Blackwood & Associates",
+        "outstanding_count": 2,
+        "method": "phone",
+        "notes": "Helen Yates confirmed the knotweed management plan has been obtained and will be sent today. Building regs cert still being sourced. Seller has contacted Bristol City Council directly."
+      },
+      "description": "Chased remaining enquiries. Knotweed plan expected today. Building regs cert still being sourced."
+    }
+  ]
+}
