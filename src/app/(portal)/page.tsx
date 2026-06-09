@@ -1,17 +1,27 @@
 import { buildCaseView } from "@/domain";
+import { DEMO_CHECKPOINTS, clampCheckpointIndex } from "@/domain/demo/checkpoints";
 import { Blockers } from "@/app/(portal)/Blockers/Blockers";
 import { CaseHeader } from "@/app/(portal)/CaseHeader";
+import { DemoControls } from "@/app/(portal)/DemoControls";
 import { KeyFacts } from "@/app/(portal)/KeyFacts";
 import { NextSteps } from "@/app/(portal)/NextSteps";
 import { ProgressJourney } from "@/app/(portal)/ProgressJourney/ProgressJourney";
 import { StatusSummary } from "@/app/(portal)/StatusSummary";
 import { Timeline } from "@/app/(portal)/Timeline/Timeline";
 
-const CasePortalPage = async () => {
-  const view = await buildCaseView();
+type CasePortalPageProps = {
+  searchParams: Promise<{ stage?: string }>;
+};
+
+const CasePortalPage = async ({ searchParams }: CasePortalPageProps) => {
+  const { stage } = await searchParams;
+  const stageIndex = clampCheckpointIndex(Number.parseInt(stage ?? "", 10));
+  const view = await buildCaseView(DEMO_CHECKPOINTS[stageIndex].at);
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+      <DemoControls stageIndex={stageIndex} />
+
       <CaseHeader
         property={view.property}
         conveyancer={view.conveyancer}

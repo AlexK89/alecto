@@ -1,3 +1,6 @@
+import { eventsUpTo, reconstructTasksAsOf } from "@/domain/asOf";
+import { DEFAULT_CHECKPOINT_INDEX, DEMO_CHECKPOINTS } from "@/domain/demo/checkpoints";
+import { DEMO_FUTURE_EVENTS } from "@/domain/demo/futureEvents";
 import { type CaseData, loadCaseData } from "@/domain/loadCase";
 import { buildStatusSummary, buildTimelineImpactNote } from "@/domain/narrative";
 import {
@@ -10,17 +13,12 @@ import {
 import { humaniseEvents } from "@/domain/timeline";
 import type { CaseView, KeyDate, MoneyFact, PropertySummary } from "@/domain/types";
 
-/**
- * The data is from late 2024. Using the real wall-clock "now" would make a
- * mid-flight case look wildly overdue, so by default we anchor "now" to the most
- * recent event in the feed — a realistic present moment for the demo. The value
- * is injectable so date logic stays testable and a live feed could pass the real
- * current time instead.
- */
-const latestEventTimestamp = (data: CaseData): string => {
-  const timestamps = data.events.map((event) => event.timestamp).sort();
-  return timestamps.at(-1) ?? data.caseFile.case.created_at;
-};
+// Default "now" for the portal. The data is from late 2024, so using the real
+// wall-clock time would make a mid-flight case look wildly overdue; instead we
+// anchor to the real present moment in the feed (the "Today" checkpoint). The
+// value is injectable so the demo stepper can time-travel and a live feed could
+// pass the real current time.
+const DEFAULT_NOW = DEMO_CHECKPOINTS[DEFAULT_CHECKPOINT_INDEX].at;
 
 const humanisePropertyType = (propertyType: string): string =>
   propertyType.replace(/_/g, "-");
@@ -83,13 +81,21 @@ const buildMoneyFacts = (data: CaseData): MoneyFact[] => {
   ];
 };
 
-/** Pure assembler: turns loaded data + a reference time into the full view. */
+/**
+ * Pure assembler: turns loaded data + a reference time into the full view. Task
+ * statuses and the enquiry tracker are reconstructed as of `now` by replaying
+ * the event log, so the same code renders every point in the journey.
+ */
 export const assembleCaseView = (data: CaseData, now: string): CaseView => {
-  const phases = derivePhases(data.tasks);
-  const enquiries = deriveEnquirySummary(data.tasks, data.events);
-  const blockers = deriveBlockers(data.events);
-  const overallPercent = deriveOverallPercent(data.tasks);
+  const eventsAsOf = eventsUpTo(data.events, now);
+  const tasksAsOf = reconstructTasksAsOf(data.tasks, eventsAsOf);
+
+  const phases = derivePhases(tasksAsOf);
+  const enquiries = deriveEnquirySummary(tasksAsOf, eventsAsOf);
+  const blockers = deriveBlockers(eventsAsOf);
+  const overallPercent = deriveOverallPercent(tasksAsOf);
   const property = buildPropertySummary(data);
+  const isComplete = overallPercent >= 100;
   const currentPhaseLabel = phases.find((phase) => phase.isCurrent)?.label ?? "Complete";
 
   const conveyancer = data.caseFile.parties.buyer_conveyancer;
@@ -119,22 +125,29 @@ export const assembleCaseView = (data: CaseData, now: string): CaseView => {
       mortgageOfferExpiry: data.caseFile.parties.mortgage_lender.offer_expiry,
       targetCompletionDate: data.caseFile.case.target_completion_date,
       hasBuildingRegsBlocker,
+      isComplete,
     }),
     phases,
-    nextSteps: deriveNextSteps(data.tasks),
+    nextSteps: deriveNextSteps(tasksAsOf),
     blockers,
     enquiries,
     keyDates: buildKeyDates(data),
     moneyFacts: buildMoneyFacts(data),
-    timeline: humaniseEvents(data.events, {
+    timeline: humaniseEvents(eventsAsOf, {
       buyerName: data.caseFile.parties.buyer.name,
       conveyancerName: conveyancer.handler,
     }),
   };
 };
 
-/** Loads the case feed from disk and assembles the customer view. */
-export const buildCaseView = async (): Promise<CaseView> => {
+/**
+ * Loads the case feed from disk, appends the mocked future events (for the demo
+ * stepper), and assembles the customer view as of `now`.
+ */
+export const buildCaseView = async (now: string = DEFAULT_NOW): Promise<CaseView> => {
   const data = await loadCaseData();
-  return assembleCaseView(data, latestEventTimestamp(data));
+  const events = [...data.events, ...DEMO_FUTURE_EVENTS].sort((earlier, later) =>
+    earlier.timestamp.localeCompare(later.timestamp),
+  );
+  return assembleCaseView({ ...data, events }, now);
 };

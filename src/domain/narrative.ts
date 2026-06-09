@@ -16,6 +16,10 @@ export type StatusSummaryInput = {
 };
 
 export const buildStatusSummary = (input: StatusSummaryInput): string => {
+  if (input.overallPercent >= 100) {
+    return `Congratulations — your purchase of ${input.propertyAddressLine} has completed and you are now the registered legal owner of your new home. There is nothing left for you to do.`;
+  }
+
   const opening = `Your purchase of ${input.propertyAddressLine} is currently in the "${input.currentPhaseLabel}" stage, with ${input.overallPercent}% of the legal work complete.`;
 
   const enquiries = input.enquiries;
@@ -42,9 +46,14 @@ export type TimelineImpactInput = {
   mortgageOfferExpiry: string;
   targetCompletionDate: string;
   hasBuildingRegsBlocker: boolean;
+  isComplete?: boolean;
 };
 
 export const buildTimelineImpactNote = (input: TimelineImpactInput): string => {
+  if (input.isComplete) {
+    return "Your stamp duty has been paid and your ownership registered with the Land Registry. The case is now closed — enjoy your new home.";
+  }
+
   const fundingLine = `Your mortgage offer is valid until ${formatLongDate(
     input.mortgageOfferExpiry,
   )}, so the current wait doesn't put your funding at risk. We're still working towards a target completion of ${formatLongDate(

@@ -39,7 +39,7 @@ Raw JSON ──load+validate──▶ Domain entities ──derive──▶ Cust
 ```
 
 Everything that matters happens in small, pure functions, which is why that's
-where the tests live (`src/domain/__tests__`, 19 tests).
+where the tests live (`src/domain/__tests__`, 27 tests).
 
 Key modelling decisions:
 
@@ -94,18 +94,6 @@ nothing else in the app would change. See "If I had more time".
 
 ## Running it
 
-### Option A — Docker (single command)
-
-```bash
-docker compose up --build
-```
-
-Then open **http://localhost:3000**.
-
-No environment variables or API keys are required.
-
-### Option B — Local (Node 20+)
-
 ```bash
 npm install
 npm run dev      # http://localhost:3000
@@ -114,11 +102,30 @@ npm run dev      # http://localhost:3000
 Other scripts:
 
 ```bash
-npm test         # run the domain unit tests (19 tests)
+npm test         # run the domain unit tests (27 tests)
 npm run build    # production build
 npm start        # serve the production build
 npm run lint
 ```
+
+---
+
+## Demo: stepping through the journey
+
+The provided feed is a single snapshot — the case stops mid-enquiries on
+13 December 2024. To show how the portal looks at *every* stage, there's a
+**demo stepper** along the top: click any stage (or Back/Next) to time-travel the
+case from "Case opened" all the way to "Registered with Land Registry", and watch
+the progress bar, current stage, blockers, next steps and timeline all update.
+
+How it works — and why it's barely any extra code: the feed is **event-sourced**,
+so "what did the case look like on date X" is just a fold over the events up to X.
+`src/domain/asOf.ts` reconstructs each task's status (and the enquiry tracker) by
+replaying the event log up to a chosen timestamp, and the page renders the view as
+of the selected checkpoint (`?stage=N`). The default landing point is the real
+present; stages beyond it replay a **mocked continuation** of the case
+(`src/domain/demo/futureEvents.ts`), kept deliberately separate from the provided
+`data/` so the real feed stays untouched.
 
 ---
 
@@ -134,11 +141,12 @@ layer instead, so the provided feed stays the contract.
 
 ## Assumptions & trade-offs
 
-- **"Now" is anchored to the latest event, not the wall clock.** The data is from
-  late 2024; using the real current date would make a mid-flight case look wildly
-  overdue. `buildCaseView` defaults "now" to the most recent event timestamp
-  (`src/domain/index.ts`), and the value is injectable so a live feed could pass
-  the real time. This keeps date logic testable, too.
+- **"Now" is anchored to the data, not the wall clock.** The data is from late
+  2024; using the real current date would make a mid-flight case look wildly
+  overdue. `buildCaseView(now)` defaults to the real "present" in the feed (the
+  "Today" checkpoint), and the demo stepper passes other timestamps to time-travel.
+  The value is injectable so a live feed could pass the real time, which also keeps
+  the date logic testable.
 - **Single, hard-coded case.** The feed describes one case, so the app shows one.
   Multi-case support would be a routing + list layer on top of the same domain
   functions (see below).
@@ -165,10 +173,13 @@ src/
     progress.ts           # phases, % complete, next steps, blockers, enquiry rollup
     timeline.ts           # humanises & filters the event log
     narrative.ts          # deterministic plain-English summaries (the LLM seam)
-    index.ts              # buildCaseView(): assembles the whole view model
-    __tests__/            # 19 vitest tests over the real data
+    asOf.ts               # time-travel: reconstruct case state from event replay
+    demo/                 # demo checkpoints + mocked future events (demo only)
+    index.ts              # buildCaseView(now): assembles the whole view model
+    __tests__/            # 27 vitest tests over the real data
   app/(portal)/           # the portal page + its page-specific components
-    page.tsx              # server component: buildCaseView() → composes sections
+    page.tsx              # server component: reads ?stage, buildCaseView() → sections
+    DemoControls.tsx      # demo stepper (time-travel through the journey)
     CaseHeader / StatusSummary / NextSteps / KeyFacts
     ProgressJourney/      # component + its PhaseStep subcomponent
     Blockers/             # component + its OutstandingEnquiry subcomponent
